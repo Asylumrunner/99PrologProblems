@@ -81,9 +81,34 @@ rotateCCW([H|T], List2) :-
 
 % 1.20 Remove the Kth element from a list
 
+removeKth([H|T], X, N, L2) :-
+	N > 0,
+	N1 is N - 1,
+	removeKth(T, X, N1, L3),
+	append([H], L3, L2).
+
+removeKth([H|T], H, 0, T).
+
 % 1.21 Insert an element at a given position into a list
 
-% 1.22 Create a list containing all integers within a given list
+insertAtK([H|T], X, K, L) :-
+	K > 0,
+	K1 is K - 1,
+	insertAtK(T, X, K1, L2),
+	append([H], L2, L).
+
+insertAtK(L1, X, 0, L2) :-
+	append([X], L1, L2).
+
+
+% 1.22 Create a list containing all integers within a given range
+
+range(X, X, [X]).
+
+range(X, Y, L) :-
+	X1 is X + 1,
+	range(X1, Y, L1),
+	append([X], L1, L).
 
 % 1.23 Extract a given number of randomly selected elements from a list
 
