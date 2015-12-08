@@ -46,6 +46,19 @@ palindrome(L1) :-
 
 % 1.07 Flatten a nested list structure
 
+flatten([[H|T]|T2], L3) :-
+	append([H], T, L1),
+	flatten(T2, L2),
+	append(L1, L2, L3).
+
+flatted([H|T], L2) :-
+	flatted(T, L1),
+	append([H], L1, L2).
+
+flatten([X], [X]).
+
+flatten([[X]], [X]).
+
 % 1.08 Eliminate cosecutive duplicates of list elements
 
 % 1.09 Pack consecutive duplicates of list elements into sublists
