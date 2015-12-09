@@ -51,7 +51,7 @@ flatten([[H|T]|T2], L3) :-
 	flatten(T2, L2),
 	append(L1, L2, L3).
 
-flatted([H|T], L2) :-
+flatten([H|T], L2) :-
 	flatted(T, L1),
 	append([H], L1, L2).
 
@@ -59,7 +59,27 @@ flatten([X], [X]).
 
 flatten([[X]], [X]).
 
-% 1.08 Eliminate cosecutive duplicates of list elements
+% 1.08 Eliminate consecutive duplicates of list elements
+
+retrieveHead([H|_], H).
+
+retrieveHead([X], X).
+
+retrieveTail([_|T], T).
+
+retrieveTail([_], []).
+
+elimDupes([H|T], L2) :-
+	retrieveHead(T, H),
+	elimDupes(T, L2).
+
+elimDupes([H|T], L2) :-
+	elimDupes(T, L1),
+	append([H], L1, L2).
+
+elimDupes([X], [X]).
+
+elimDupes([], []).
 
 % 1.09 Pack consecutive duplicates of list elements into sublists
 
@@ -72,6 +92,13 @@ flatten([[X]], [X]).
 % 1.13 Run-length encoding of a list (direct solution)
 
 % 1.14 Duplicate the elements of a list
+
+dupeElements([H|T], L3) :-
+	append([H], [H], L1),
+	dupeElements(T, L2),
+	append(L1, L2, L3).
+
+dupeElements([X], [X, X]).
 
 % 1.15 Duplicate the number of elements of a list a given number of times
 
