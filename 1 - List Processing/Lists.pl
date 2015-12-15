@@ -104,9 +104,29 @@ dupeElements([X], [X, X]).
 
 % 1.16 Drop every Nth element of a list
 
-% 1.17 Split a list into two parts, given the length of the first parts
+% 1.17 Split a list into two parts, given the length of the first part
+
+splitList([H|T], 1, [H], T).
+
+splitList([H|T], X, [H|L2], L3) :-
+	X > 1,
+	X2 is X - 1,
+	splitList(T, X2, L2, L3).
+
 
 % 1.18 Extract a slice from a list
+
+extractSlice([_|T], I, K, L2) :-
+	I > 1,
+	I2 is I-1,
+	K2 is K-1,
+	extractSlice(T, I2, K2, L2).
+
+extractSlice([H|T], 1, K, [H|T2]) :-
+	K2 is K-1,
+	extractSlice(T, 1, K2, T2).
+
+extractSlice([H|_], 1, 1, [H]).
 
 % 1.19 Rotate a list N places to the left
 
